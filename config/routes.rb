@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  #get 'game_platform/game:references'
-  #get 'game_platform/platform:references'
-  #get 'game_genre/game:references'
-  #get 'game_genre/genre:references'
   resources :games
   resources :genres
   resources :platforms
