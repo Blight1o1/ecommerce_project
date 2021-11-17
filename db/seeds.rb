@@ -12,25 +12,25 @@ require 'net/http'
 require 'json'
 require 'pp'
 
-Game.destroy_all
-Genre.destroy_all
+GamePlatform.destroy_all
+GameGenre.destroy_all
 Platform.destroy_all
+Genre.destroy_all
+Game.destroy_all
 
-#  ==== CSV ==== #
-#   For Games   #
-csv_file = Rails.root.join('db/games.csv')
-csv_data = File.read(csv_file)
 
-games = CSV.parse(csv_data, headers: true, encoding: 'iso-8859-1')
+#   ==== Faker ==== #
+#   For Platform.   #
+Faker::Name.unique.clear 
+Faker::UniqueGenerator.clear
+count = 0
 
-games.each do |game|
-    if game[0] != nil
-        description = game[0] + " is made by " + game[8] + " in " + game[15] + "."
-        new_game = Game.create(name: game[0], description: description , price: game[11], score: game[9], rating: game[13])
-    end
-
+31.times do
+    platform = Platform.create(name: Faker::Game.unique.platform)
+    #puts count
+    count = count + 1
 end
-puts "Entered Games data"
+puts "Entered Platform data"
 
 #  ==== CSV ==== #
 #   For Genres   #
@@ -49,16 +49,41 @@ genres.each do |genre|
 end
 puts "Entered Genre data"
 
+#  ==== CSV ==== #
+#   For Games   #
+csv_file = Rails.root.join('db/games.csv')
+csv_data = File.read(csv_file)
 
-#   ==== Faker ==== #
-#   For Platform.   #
-Faker::Name.unique.clear 
-Faker::UniqueGenerator.clear
-count = 0
+games = CSV.parse(csv_data, headers: true, encoding: 'iso-8859-1')
 
-31.times do
-    platform = Platform.create(name: Faker::Game.unique.platform)
-    #puts count
-    count = count + 1
+games.each do |game|
+    if game[0] != nil
+
+        game_exists = Platform.find_by(name: game[0])
+
+        if (game_exists == nil)
+            publisher = game[7]
+            if publisher == nil
+                publisher = "unknown"
+            end
+            description = game[0] + " is made by " + publisher + " in " + game[15] + "."
+            new_game = Game.create(name: game[0], description: description , price: game[11], score: game[9], rating: game[13])
+
+            game_genres = game[5].split(',')
+            #==== Connection between Games and Genre ====#
+            game_genres.each do |x|
+                genre_of_game = Platform.find_by(name: x)
+                GameGenre.create(game: new_game, genre: genre_of_game)
+            end
+        end
+        
+        game_platforms = game[12].split(',')
+        #==== Connection between Games and Platform ====#
+        console = Platform.find_by(name: game_platforms)
+        GamePlatform.create(game: new_game, platform: console)
+
+    end
 end
-puts "Entered Platform data"AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+puts "Entered Games data"
+
+#AdminUser.create!(email: 'jordan@blight.ca', password: 'mypassword', password_confirmation: 'mypassword') if Rails.env.development?
