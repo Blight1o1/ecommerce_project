@@ -37,7 +37,7 @@ puts "Entered Platform data"
 csv_file = Rails.root.join('db/genres.csv')
 csv_data = File.read(csv_file)
 
-genres = CSV.parse(csv_data, headers: true, encoding: 'iso-8859-1')
+genres = CSV.parse(csv_data, headers: true)#, encoding: 'iso-8859-1'
 
 genres.each do |genre|
     if genre[0] != nil
@@ -72,15 +72,33 @@ games.each do |game|
             game_genres = game[5].split(',')
             #==== Connection between Games and Genre ====#
             game_genres.each do |x|
-                genre_of_game = Platform.find_by(name: x)
+                filter_name = x.split
+                genre_of_game = Genre.find_by(name: filter_name[0])
                 GameGenre.create(game: new_game, genre: genre_of_game)
             end
+
+            game_platforms = game[12]
+            if(game_platforms == "X360")
+                game_platforms = "Xbox 360"
+            end
+            if(game_platforms == "Sony PSP")
+                game_platforms = "PlayStation Portable"
+            end
+            if(game_platforms == "Nintendo Wii")
+                game_platforms = "Wii"
+            end
+            #==== Connection between Games and Platform ====#
+            console = Platform.find_or_create_by(name: game_platforms)
+            GamePlatform.create(game: new_game, platform: console)
+        else 
+            game_platforms = game[12]
+            if(game_platforms == "X360")
+                game_platforms = "Xbox 360"
+            end
+            #==== Connection between Games and Platform ====#
+            console = Platform.find_or_create_by(name: game_platforms)
+            GamePlatform.create(game: game_exists, platform: console)
         end
-        
-        game_platforms = game[12].split(',')
-        #==== Connection between Games and Platform ====#
-        console = Platform.find_by(name: game_platforms)
-        GamePlatform.create(game: new_game, platform: console)
 
     end
 end
