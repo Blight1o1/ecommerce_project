@@ -61,4 +61,4 @@ count = 0
     #puts count
     count = count + 1
 end
-puts "Entered Platform data"
+puts "Entered Platform data"AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
