@@ -8,9 +8,21 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   </head>
 
   <body>
+    <%= image_tag "JB_games.jpg", height: 100, alt: "Logo"%>
+    
+    <div class="tabs">
+      <ul>
+        <li><%= link_to "Home", games_path %></li>
+        <li><%= link_to "Games", games_path %></li>
+        <li><%= link_to "Genres", genres_path %></li>
+        <li><%= link_to "Platforms", platforms_path %></li>
+      </ul>
+    </div>
+
     <%= yield %>
   </body>
 </html>

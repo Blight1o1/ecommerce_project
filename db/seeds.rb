@@ -42,7 +42,7 @@ genres = CSV.parse(csv_data, headers: true, encoding: 'iso-8859-1')
 genres.each do |genre|
     if genre[0] != nil
         title = genre[2].first(genre[2].index(':'))
-        content = genre[2].from(genre[2].index(':'))
+        content = genre[2].from(genre[2].index(':') + 2)
         new_genre = Genre.create(name: title, description: content)
     end
 
