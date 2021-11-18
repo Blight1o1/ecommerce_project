@@ -1,14 +1,27 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @genre.name %>
-</p>
+<div class="card-content">
+  <h3 class="title is-5"><%= @genre.name %></h3>
+  <br>
+  <p><%= @genre.description%></p>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @genre.description %>
-</p>
-
-<%= link_to 'Edit', edit_genre_path(@genre) %> |
-<%= link_to 'Back', genres_path %>
+<div class="columns is-multiline is-4">
+  <% @genre.games.each do |game| %>
+    <div class="column is-one-quarter">
+      <div class="card">
+          <div class="card-content">
+              <h3 class="title is-5"><%= link_to game.name, game %></h3>
+              <p>Score:       <%= game.score%></p>
+              <p>Rating:      <%= game.rating%></p>
+              <p>Price:       $<%= game.price%></p>
+              <p>Genres:      <% game.genres.each do |genre| %> <%= link_to genre.name, genre %><% end %></p>
+              <p>Platforms:   <% game.platforms.each do |platform| %> <%= link_to platform.name, platform %><% end %></p>
+              <br>
+              <p><%= game.description%></p>
+          </div>
+      </div>
+    </div>
+  <%end%>
+  
+</div>
