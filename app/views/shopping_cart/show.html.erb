@@ -1,0 +1,4 @@
+<%= session[:shopping_cart] %>
+<% session[:shopping_cart].each do |item| %>
+    <%= item %>
+<% end %>

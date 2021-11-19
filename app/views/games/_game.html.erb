@@ -9,6 +9,11 @@
             <p>Platforms:   <% game.platforms.each do |platform| %> <%= link_to platform.name, platform %><% end %></p>
             <br>
             <p><%= game.description%></p>
+
+            <%= form_with url: shopping_cart_index_path, method: :post do %>
+                <%= hidden_field_tag(:id, game.id) %>
+                <%= button_tag 'Add to Cart' %>
+            <% end %>
         </div>
     </div>
 </div>
