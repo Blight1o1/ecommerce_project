@@ -1,0 +1,13 @@
+﻿Province,Type,PST,GST,HST,Total Tax Rate,Notes:
+Alberta,GST,,0.05,,0.05,
+British Columbia,GST + PST,0.07,0.05,,0.12,More info
+Manitoba,GST + PST,0.07,0.05,,0.12,"As of July 1, 2019 the PST rate was reduced from 8% to 7%."
+New Brunswick,HST,,,0.15,0.15,"As of July 1, 2016 the HST rate increased from 13% to 15%."
+Newfoundland and Labrador,HST,,,0.15,0.15,"As of July 1, 2016 the HST rate increased from 13% to 15%."
+Northwest Territories,GST,,0.05,,0.05,
+Nova Scotia,HST,,,0.15,0.15,
+Nunavut,GST,,0.05,,0.05,
+Ontario,HST,,,0.13,0.13,
+Prince Edward Island,HST,,,0.15,0.15,
+Quebec,GST + *QST,0.10,0.05,,0.15,
+Saskatchewan,GST + PST,0.06,0.05,,0.11,
