@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :genres
   resources :platforms
 
-  resources :shopping_cart, only: %i[create destroy]
+  resources :shopping_cart, only: %i[create edit destroy]
   get "/shopping_cart",   to: "shopping_cart#show"
 
   get "/home",            to: "home#show"

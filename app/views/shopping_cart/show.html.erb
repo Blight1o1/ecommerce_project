@@ -1,4 +1,29 @@
-<%= session[:shopping_cart] %>
+<% count = 0 %>
 <% session[:shopping_cart].each do |item| %>
-    <%= item %>
+    <div class="columns">
+        <div class="column">
+            <%= Game.find(item).name %>
+        </div>
+        <div class="column">
+            <%= form_with url: edit_shopping_cart_path(item), method: :get do %>
+                <%= hidden_field_tag(:quantity, -1) %>
+                <%= button_tag '▲' %>
+            <% end %>
+            <%= session[:shopping_cart_quantity][count] %>
+            <%= form_with url: edit_shopping_cart_path(item), method: :get do %>
+                <%= hidden_field_tag(:quantity, 1) %>
+                <%= button_tag '▼' %>
+            <% end %>
+        </div>
+        <div class="column">
+            <%= button_to "Remove from cart", shopping_cart_path(item) , method: :delete %>
+        </div>
+    </div>
+    <br>
+    <% count = count + 1 %>
 <% end %>
+
+
+<%=  session[:shopping_cart_quantity] %>
+<%=  session[:shopping_cart].include?(session[:shopping_cart][0]) %>
+<%=  session[:shopping_cart].include?(12) %>
