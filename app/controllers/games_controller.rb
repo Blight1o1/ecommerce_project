@@ -19,6 +19,25 @@ class GamesController < ApplicationController
   def edit
   end
 
+  def search
+    wildcard_search = "%#{params[:keywords]}%"
+    search_genre = params[:genre]
+    search_platform = params[:genre]
+
+    if search_genre == ""
+      search_genre = Genre.all
+    end
+
+    if search_platform == ""
+      search_platform = Platform.all
+    end
+
+    #search = Game.where("Games.name LIKE ? OR Games.description LIKE ?", wildcard_search, wildcard_search).order(:name).page(params[:page])
+    genre = Game.joins(:genres).where(genres: search_genre)
+    platform = genre.joins(:platforms).where(platforms: search_platform)
+    @games = platform.where("Games.name LIKE ? OR Games.description LIKE ?", wildcard_search, wildcard_search).order(:name).page(params[:page])
+  end
+
   # POST /games or /games.json
   def create
     @game = Game.new(game_params)

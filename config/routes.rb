@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
-  resources :games
+  root to: "home#show"
+  #resources :games
   resources :genres
   resources :platforms
+
+  resources :games do
+    collection do
+      get 'search'
+    end
+  end
 
   resources :shopping_cart, only: %i[create edit destroy]
   get "/shopping_cart",   to: "shopping_cart#show"

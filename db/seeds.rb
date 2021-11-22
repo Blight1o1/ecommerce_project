@@ -59,7 +59,7 @@ games = CSV.parse(csv_data, headers: true, encoding: 'iso-8859-1')
 games.each do |game|
     if game[0] != nil
 
-        game_exists = Platform.find_by(name: game[0])
+        game_exists = Game.find_by(name: game[0])
 
         if (game_exists == nil)
             publisher = game[7]
@@ -94,6 +94,12 @@ games.each do |game|
             game_platforms = game[12]
             if(game_platforms == "X360")
                 game_platforms = "Xbox 360"
+            end
+            if(game_platforms == "Sony PSP")
+                game_platforms = "PlayStation Portable"
+            end
+            if(game_platforms == "Nintendo Wii")
+                game_platforms = "Wii"
             end
             #==== Connection between Games and Platform ====#
             console = Platform.find_or_create_by(name: game_platforms)
