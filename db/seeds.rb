@@ -12,6 +12,7 @@ require 'net/http'
 require 'json'
 require 'pp'
 
+Province.destroy_all
 GamePlatform.destroy_all
 GameGenre.destroy_all
 Platform.destroy_all
@@ -109,5 +110,18 @@ games.each do |game|
     end
 end
 puts "Entered Games data"
+
+#  ==== CSV ==== #
+#   For Games   #
+csv_file = Rails.root.join('db/taxes.csv')
+csv_data = File.read(csv_file)
+
+province = CSV.parse(csv_data, headers: true, encoding: 'iso-8859-1')
+
+province.each do |province|
+    Province.create(name: province[0], pst: province[2], gst: province[3], hst: province[4], total_tax: province[5])
+end
+
+puts "Entered Province data"
 
 #AdminUser.create!(email: 'jordan@blight.ca', password: 'mypassword', password_confirmation: 'mypassword') if Rails.env.development?
