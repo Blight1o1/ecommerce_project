@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_filter :set_game, only: %i[ show edit update destroy ]
+  before_action :set_game, only: %i[ show edit update destroy ]
 
   # GET /games or /games.json
   def index
