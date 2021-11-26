@@ -12,12 +12,14 @@ require 'net/http'
 require 'json'
 require 'pp'
 
+#User.destroy_all
 Province.destroy_all
 GamePlatform.destroy_all
 GameGenre.destroy_all
 Platform.destroy_all
 Genre.destroy_all
 Game.destroy_all
+puts "Purged data"
 
 
 #   ==== Faker ==== #
@@ -123,5 +125,6 @@ province.each do |province|
 end
 
 puts "Entered Province data"
+
 
 #AdminUser.create!(email: 'jordan@blight.ca', password: 'mypassword', password_confirmation: 'mypassword') if Rails.env.development?

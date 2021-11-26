@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: %i[ show edit update destroy ]
+  before_filter :set_game, only: %i[ show edit update destroy ]
 
   # GET /games or /games.json
   def index
@@ -22,19 +22,23 @@ class GamesController < ApplicationController
   def search
     wildcard_search = "%#{params[:keywords]}%"
     search_genre = params[:genre]
-    search_platform = params[:genre]
+    search_platform = params[:platform]
 
     if search_genre == ""
-      search_genre = Genre.all
+      genre = Game.all
+    else
+      genre = Game.joins(game_genres: :genre).where("Genres.id LIKE ?", search_genre)
     end
 
     if search_platform == ""
-      search_platform = Platform.all
+      platform = genre
+    else
+      platform = genre.joins(game_platforms: :platform).where("Platforms.id LIKE ?", search_platform)
     end
 
     #search = Game.where("Games.name LIKE ? OR Games.description LIKE ?", wildcard_search, wildcard_search).order(:name).page(params[:page])
-    genre = Game.joins(:genres).where(genres: search_genre)
-    platform = genre.joins(:platforms).where(platforms: search_platform)
+    #genre = Game.joins(game_genres: :genre).where("Genres.id LIKE ?", search_genre)
+    #platform = genre.joins(game_platforms: :platforms).where("Platforms.id LIKE ?", search_platform)
     @games = platform.where("Games.name LIKE ? OR Games.description LIKE ?", wildcard_search, wildcard_search).order(:name).page(params[:page])
   end
 

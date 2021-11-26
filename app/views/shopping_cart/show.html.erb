@@ -6,12 +6,12 @@
         </div>
         <div class="column">
             <%= form_with url: edit_shopping_cart_path(item), method: :get do %>
-                <%= hidden_field_tag(:quantity, -1) %>
+                <%= hidden_field_tag(:quantity, 1) %>
                 <%= button_tag '▲' %>
             <% end %>
             <%= session[:shopping_cart_quantity][count] %>
             <%= form_with url: edit_shopping_cart_path(item), method: :get do %>
-                <%= hidden_field_tag(:quantity, 1) %>
+                <%= hidden_field_tag(:quantity, -1) %>
                 <%= button_tag '▼' %>
             <% end %>
         </div>
@@ -27,3 +27,5 @@
 <%=  session[:shopping_cart_quantity] %>
 <%=  session[:shopping_cart].include?(session[:shopping_cart][0]) %>
 <%=  session[:shopping_cart].include?(12) %>
+<%=  session[:temp] %>
+<%= current_user.province_id %>

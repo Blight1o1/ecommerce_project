@@ -1,4 +1,5 @@
 class ShoppingCartController < ApplicationController
+    before_action :authenticate_user!
 
     def create
         logger.debug("Adding #{params[:id]} to cart.")

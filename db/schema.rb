@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_22_203154) do
+ActiveRecord::Schema.define(version: 2021_11_23_010111) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -106,7 +106,9 @@ ActiveRecord::Schema.define(version: 2021_11_22_203154) do
     t.boolean "admin"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "province_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["province_id"], name: "index_users_on_province_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -114,4 +116,5 @@ ActiveRecord::Schema.define(version: 2021_11_22_203154) do
   add_foreign_key "game_genres", "genres"
   add_foreign_key "game_platforms", "games"
   add_foreign_key "game_platforms", "platforms"
+  add_foreign_key "users", "provinces"
 end
