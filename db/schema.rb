@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_23_010111) do
+ActiveRecord::Schema.define(version: 2021_11_26_203823) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -47,6 +47,18 @@ ActiveRecord::Schema.define(version: 2021_11_23_010111) do
     t.index ["genre_id"], name: "index_game_genres_on_genre_id"
   end
 
+  create_table "game_orders", force: :cascade do |t|
+    t.integer "game_id", null: false
+    t.integer "order_id", null: false
+    t.decimal "tax_rate"
+    t.date "order_date"
+    t.decimal "total"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_id"], name: "index_game_orders_on_game_id"
+    t.index ["order_id"], name: "index_game_orders_on_order_id"
+  end
+
   create_table "game_platforms", force: :cascade do |t|
     t.integer "game_id", null: false
     t.integer "platform_id", null: false
@@ -69,6 +81,14 @@ ActiveRecord::Schema.define(version: 2021_11_23_010111) do
   create_table "genres", force: :cascade do |t|
     t.string "name"
     t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "product"
+    t.integer "quantity"
+    t.decimal "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -114,6 +134,8 @@ ActiveRecord::Schema.define(version: 2021_11_23_010111) do
 
   add_foreign_key "game_genres", "games"
   add_foreign_key "game_genres", "genres"
+  add_foreign_key "game_orders", "games"
+  add_foreign_key "game_orders", "orders"
   add_foreign_key "game_platforms", "games"
   add_foreign_key "game_platforms", "platforms"
   add_foreign_key "users", "provinces"

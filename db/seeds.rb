@@ -12,7 +12,7 @@ require 'net/http'
 require 'json'
 require 'pp'
 
-#User.destroy_all
+User.destroy_all
 Province.destroy_all
 GamePlatform.destroy_all
 GameGenre.destroy_all

@@ -1,3 +1,9 @@
+
+
+<% if user_signed_in? %>
+    <h1 class="title"><%= current_user.name %>'s current cart.</h1>
+<% end %>
+
 <% count = 0 %>
 <% session[:shopping_cart].each do |item| %>
     <div class="columns">
