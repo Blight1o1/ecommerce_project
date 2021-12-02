@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_26_203823) do
+ActiveRecord::Schema.define(version: 2021_12_02_231735) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -50,6 +50,9 @@ ActiveRecord::Schema.define(version: 2021_11_26_203823) do
   create_table "game_orders", force: :cascade do |t|
     t.integer "game_id", null: false
     t.integer "order_id", null: false
+    t.string "address"
+    t.string "city_province"
+    t.string "postal_code"
     t.decimal "tax_rate"
     t.date "order_date"
     t.decimal "total"
@@ -91,6 +94,8 @@ ActiveRecord::Schema.define(version: 2021_11_26_203823) do
     t.decimal "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "platforms", force: :cascade do |t|
@@ -138,5 +143,6 @@ ActiveRecord::Schema.define(version: 2021_11_26_203823) do
   add_foreign_key "game_orders", "orders"
   add_foreign_key "game_platforms", "games"
   add_foreign_key "game_platforms", "platforms"
+  add_foreign_key "orders", "users"
   add_foreign_key "users", "provinces"
 end

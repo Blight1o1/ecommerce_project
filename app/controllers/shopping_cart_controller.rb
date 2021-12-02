@@ -20,7 +20,7 @@ class ShoppingCartController < ApplicationController
         end
 
 
-
+        total()
 
         #session[:shopping_cart] << id
         redirect_to games_path
@@ -44,6 +44,8 @@ class ShoppingCartController < ApplicationController
             end
         end
 
+        total()
+
         redirect_to shopping_cart_index_path
     end
 
@@ -59,6 +61,22 @@ class ShoppingCartController < ApplicationController
         end
 
         session[:shopping_cart].delete(id)
+
+        total()
+
         redirect_to shopping_cart_index_path
+    end
+
+    def total
+        
+        count = 0
+        session[:total] = 0
+        session[:shopping_cart].each do | item_id |
+            product = Game.find_by_id(item_id)
+            session[:total] = session[:total].to_d + (product.price * session[:shopping_cart_quantity][count].to_d)
+            count = count + 1
+        end
+
+        session[:taxes] = (session[:total].to_d * Province.find_by_id(current_user.province_id).total_tax.to_d)
     end
 end

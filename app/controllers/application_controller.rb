@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
     def initialize_session
         session[:shopping_cart] ||= []
         session[:shopping_cart_quantity] ||= []
+        session[:total] ||= 0
     end
 
     def cart

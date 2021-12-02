@@ -29,6 +29,11 @@
     <% count = count + 1 %>
 <% end %>
 
+<h1 class="title is-4">Subtotal: <%=  number_to_currency(session[:total]) %></h1>
+<h1 class="subtitle is-4">Taxes: <%=  number_to_currency(session[:taxes]) %></h1>
+<h1 class="title is-3">Total: <%=  number_to_currency(session[:total].to_d + session[:taxes].to_d) %></h1>
+
+<%= button_to "Purchase", orders_path , method: :post %>
 
 <%=  session[:shopping_cart_quantity] %>
 <%=  session[:shopping_cart].include?(session[:shopping_cart][0]) %>
