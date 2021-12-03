@@ -4,8 +4,8 @@
             <div class="card-content">
                 <h3 class="title is-5">Phone</h3>
                 <br>
-                <p>Interested in talking to a representative please call us at.</p>
-                <h6>+1 877 888 55555</h6>
+                <p><%= Contact.first.phone_content %></p>
+                <h6><%= Contact.first.phone %></h6>
             </div>
         </div>
     </div>
@@ -15,8 +15,8 @@
             <div class="card-content">
                 <h3 class="title is-5">Email</h3>
                 <br>
-                <p>If you would like to email a representative you can email us at.</p>
-                <h6>Info@JBGames.com</h6>
+                <p><%= Contact.first.email_content %></p>
+                <h6><%= Contact.first.email %></h6>
             </div>
         </div>
     </div>

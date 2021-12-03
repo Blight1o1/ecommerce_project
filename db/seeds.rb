@@ -19,6 +19,8 @@ GameGenre.destroy_all
 Platform.destroy_all
 Genre.destroy_all
 Game.destroy_all
+Contact.destroy_all
+About.destroy_all
 puts "Purged data"
 
 
@@ -127,4 +129,17 @@ end
 puts "Entered Province data"
 
 
-#AdminUser.create!(email: 'jordan@blight.ca', password: 'mypassword', password_confirmation: 'mypassword') if Rails.env.development?
+#   For About and Contact   #
+
+About.create(content: "JB Games is a used game retailer, and we sell used games for a 'reasonable' price. Our games maybe be old, but our prices are like the games are brand new.
+                        So whether you enjoy old classics or blatant cash grabs, we are the store for you. Over the years or 'competitive' prices have made some customers say we 
+                        are ripping them off. So to combat those rumors, we have reduced our prices and started charging extra for luxuries such as game boxes, store bags, and 
+                        instruction manuals. There is also a 'small' handing fee as all of our games are 'antiques.'' We pride ourselves on excellent customer support. Our one 
+                        employee per store will be plenty to service all of our customers.")
+
+Contact.create(phone: "+1 877 888 55555", phone_content: "Interested in talking to a representative please call us at.", email: "Info@JBGames.com", email_content: "If you would like to email a representative you can email us at.")
+
+puts "Entered About and Contact data"
+
+
+AdminUser.create!(email: 'jordan@blight.ca', password: 'mypassword', password_confirmation: 'mypassword') if Rails.env.development?
