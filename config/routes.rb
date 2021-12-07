@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'invoice/index'
+  get 'invoice/show'
   get 'orders/index'
   get 'orders/show'
   devise_for :users, controllers: { sessions: 'users/sessions' }
@@ -16,7 +18,12 @@ Rails.application.routes.draw do
   resources :shopping_cart, only: %i[create edit destroy]
   get "/shopping_cart",   to: "shopping_cart#show"
 
-  resources :orders, only: %i[create edit destroy]
+  #resources :orders, only: %i[create edit destroy]
+  scope "/order" do
+    post "create",  to: "orders#create",  as: "order_create"
+    get  "success", to: "orders#success", as: "order_success"
+    get  "cancel",  to: "orders#cancel",  as: "order_cancel"
+  end
 
   get "/home",            to: "home#show"
   get "/contact",         to: "contact#show"
