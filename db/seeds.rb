@@ -12,6 +12,8 @@ require 'net/http'
 require 'json'
 require 'pp'
 
+GameOrder.destroy_all
+Order.destroy_all
 User.destroy_all
 Province.destroy_all
 GamePlatform.destroy_all
