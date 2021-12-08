@@ -56,7 +56,7 @@ class CheckoutController < ApplicationController
         session[:total] = 0
         session[:taxes] = 0
 
-        redirect_to orders_path
+        redirect_to order_path(receipt.id)
         
       end
     

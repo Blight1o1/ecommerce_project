@@ -10,10 +10,9 @@
             <br>
             <p><%= game.description%></p>
 
-            <%= form_with url: shopping_cart_index_path, method: :post do %>
-                <%= hidden_field_tag(:id, game.id) %>
-                <%= button_tag 'Add to Cart' %>
-            <% end %>
+
+            <%= button_to "Add to cart", shopping_cart_path(game.id), method: :post %>
+
         </div>
     </div>
 </div>

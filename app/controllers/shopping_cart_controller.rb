@@ -2,6 +2,10 @@ class ShoppingCartController < ApplicationController
     before_action :authenticate_user!
 
     def create
+        
+    end
+
+    def add_to_cart
         logger.debug("Adding #{params[:id]} to cart.")
 
         id = params[:id].to_i

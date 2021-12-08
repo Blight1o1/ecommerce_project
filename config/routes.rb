@@ -15,8 +15,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :shopping_cart, only: %i[create edit destroy]
-  get "/shopping_cart",   to: "shopping_cart#show"
+  resources :shopping_cart#, only: %i[create edit destroy]
+  get "/shopping_cart",   to: "shopping_cart#index"
+  post "/shopping_cart/:id",   to: "shopping_cart#add_to_cart"
 
   resources :orders#, only: %i[create edit destroy]
 
