@@ -5,11 +5,11 @@ ruby '2.7.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4' , group: [:development, :test]
+# Use pg as the database for Active Record
+gem 'pg', '~> 1.1'
 
 #postgress for priduction database
-gem 'pg', group: :production
+gem 'pg', '~> 1.1'
 
 #12 factor for heroku
 gem 'rails_12factor', group: :production
@@ -75,5 +75,3 @@ gem 'draper'
 gem 'pundit'
 
 gem 'stripe'
-
-#heroku should use ruby 2.7.1
