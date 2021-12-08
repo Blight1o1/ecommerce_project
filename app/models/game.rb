@@ -10,7 +10,7 @@ class Game < ApplicationRecord
 
 
     validates :name, :price, :score, :rating, presence: true
-    validates :price, :score, :rating, numericality: true
+    validates :price, :score, numericality: true
 
     paginates_per 20
 end

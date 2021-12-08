@@ -65,12 +65,9 @@ ActiveRecord::Schema.define(version: 2021_12_02_233927) do
   create_table "game_orders", force: :cascade do |t|
     t.integer "game_id", null: false
     t.integer "order_id", null: false
-    t.string "address"
-    t.string "city_province"
-    t.string "postal_code"
-    t.decimal "tax_rate"
-    t.date "order_date"
-    t.decimal "total"
+    t.string "product"
+    t.integer "quantity"
+    t.decimal "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["game_id"], name: "index_game_orders_on_game_id"
@@ -104,9 +101,12 @@ ActiveRecord::Schema.define(version: 2021_12_02_233927) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "product"
-    t.integer "quantity"
-    t.decimal "price"
+    t.string "address"
+    t.string "city_province"
+    t.string "postal_code"
+    t.decimal "tax_rate"
+    t.date "order_date"
+    t.decimal "total"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id", null: false

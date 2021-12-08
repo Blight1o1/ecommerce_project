@@ -74,6 +74,11 @@ games.each do |game|
             description = game[0] + " is made by " + publisher + " in " + game[15] + "."
             new_game = Game.create(name: game[0], description: description , price: game[11], score: game[9], rating: game[13])
 
+            # if(new_game.id == nil)
+            #     puts new_game.errors.full_messages
+            #     puts new_game.rating
+            # end
+
             game_genres = game[5].split(',')
             #==== Connection between Games and Genre ====#
             game_genres.each do |x|
