@@ -2,7 +2,7 @@ class ShoppingCartController < ApplicationController
     before_action :authenticate_user!
 
     def create
-        
+
     end
 
     def add_to_cart
@@ -17,7 +17,7 @@ class ShoppingCartController < ApplicationController
             count = 0
             session[:shopping_cart].each do | item_id |
                 if item_id == id
-                    session[:shopping_cart_quantity][count] = session[:shopping_cart_quantity][count] + 1
+                    session[:shopping_cart_quantity][count] = session[:shopping_cart_quantity][count] + session[:quantity]
                 end
                 count = count + 1
             end
