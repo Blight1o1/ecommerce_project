@@ -18,11 +18,13 @@ Rails.application.routes.draw do
   resources :shopping_cart, only: %i[create edit destroy]
   get "/shopping_cart",   to: "shopping_cart#show"
 
-  #resources :orders, only: %i[create edit destroy]
-  scope "/order" do
-    post "create",  to: "orders#create",  as: "order_create"
-    get  "success", to: "orders#success", as: "order_success"
-    get  "cancel",  to: "orders#cancel",  as: "order_cancel"
+  resources :orders#, only: %i[create edit destroy]
+
+
+  scope "/checkout" do
+    post "create",  to: "checkout#create",  as: "checkout_create"
+    get  "success", to: "checkout#success", as: "checkout_success"
+    get  "cancel",  to: "checkout#cancel",  as: "checkout_cancel"
   end
 
   get "/home",            to: "home#show"
